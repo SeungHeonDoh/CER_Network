@@ -4,7 +4,7 @@ import React from 'react';
 import CONST from './graph.const';
 
 import Link from '../link/Link';
-import Node from '../node/Node';
+import Node from '../node/node';
 import {
     buildLinkProps,
     buildNodeProps

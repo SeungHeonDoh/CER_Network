@@ -7,11 +7,11 @@ import { zoom as d3Zoom } from 'd3-zoom';
 
 import CONST from './graph.const';
 import DEFAULT_CONFIG from './graph.config';
-import ERRORS from '../../err';
+import ERRORS from '../err';
 
 import * as graphRenderer from './graph.renderer';
 import * as graphHelper from './graph.helper';
-import utils from '../../utils';
+import utils from '../utils';
 
 // Some d3 constant values
 const D3_CONST = {

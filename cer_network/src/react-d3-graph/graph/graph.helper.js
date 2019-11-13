@@ -7,9 +7,9 @@ import {
 
 import CONST from './graph.const';
 import DEFAULT_CONFIG from './graph.config';
-import ERRORS from '../../err';
+import ERRORS from '../err';
 
-import utils from '../../utils';
+import utils from '../utils';
 
 const NODE_PROPS_WHITELIST = ['id', 'highlighted', 'x', 'y', 'index', 'vy', 'vx'];
 
