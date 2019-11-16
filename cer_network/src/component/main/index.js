@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import useNetwork from '../../hook';
 import D3Graph from '../../D3Graph/D3Graph';
-import dummy from '../../utils/data_origin';
+import dummy from '../../utils/data';
 
 
 export default function Main() {
     var { nodes } = useNetwork();
+    const [ loading, setLoading ] = useState(true);
     const graphConfig = {
         graph: {
             staticGraph: false
@@ -20,6 +21,7 @@ export default function Main() {
     useEffect(() => {
         console.log(data);
         setData(dummy)
+        setLoading(false);
     })
     
 
@@ -29,7 +31,7 @@ export default function Main() {
             <D3Graph 
                 data={data}
                 config={graphConfig}
-                loading={false}
+                loading={loading}
             />
         </div>
     )
