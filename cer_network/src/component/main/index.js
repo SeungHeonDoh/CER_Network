@@ -16,8 +16,6 @@ export default function Main() {
         setLoading(false);
     })
     
-
-    
     return (
         <div>
             <D3Graph 
