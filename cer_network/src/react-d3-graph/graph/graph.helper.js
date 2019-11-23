@@ -209,6 +209,13 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
     const svg = node.svg || config.node.svg;
     const fontColor = node.fontColor || config.node.fontColor;
 
+    let type;
+    if(config.symbolKey == undefined){
+        type = node.symbolType || config.node.symbolType;
+    }else{
+        type = node.symbolType || config.symbolMapper[node[config.symbolKey]];
+    }
+
     return {
         className: CONST.NODE_CLASS_NAME,
         cursor: config.node.mouseCursor,
@@ -232,7 +239,7 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
         stroke,
         strokeWidth: strokeWidth * t,
         svg,
-        type: node.symbolType || config.node.symbolType
+        type,
     };
 }
 // Graph init

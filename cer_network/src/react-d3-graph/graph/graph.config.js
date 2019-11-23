@@ -10,6 +10,9 @@ export default {
     panAndZoom: false,
     staticGraph: false,
     width: 800,
+    symbolMapper: {
+    },
+    symbolKey: undefined,
     node: {
         color: '#d3d3d3',
         fontColor: 'black',
