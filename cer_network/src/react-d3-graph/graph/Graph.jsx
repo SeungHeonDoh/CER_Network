@@ -90,37 +90,54 @@ export default class Graph extends React.Component {
         this.state.config.panAndZoom && this.setState({ transform: transform.k });
     };
 
-    onClickNode = node => {
-        this.props.onClickNode && this.props.onClickNode(node);
-    };
-
-    onDoubleClickNode = node => {
+    _highlightOn = (node) => {
         const doHighlight = !this.state.isFocused;
         const highlightedNode = this.state.highlightedNode;
-        if (highlightedNode !== '') {
-            this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(highlightedNode, doHighlight);
-            this.setState({ highlightedNode: '' });
-        } else {
+        if (highlightedNode == '') {
             this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(node.id, doHighlight);
         }
         this.setState({ isFocused: doHighlight }, () => {
             this.props.onDoubleClickNode && this.props.onDoubleClickNode(node);
         });
+    }
+
+    _highlightOff = (node) => {
+        const doHighlight = !this.state.isFocused;
+        const highlightedNode = this.state.highlightedNode;
+        if (highlightedNode !== '') {
+            this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(highlightedNode, doHighlight);
+            this.setState({ highlightedNode: '' });
+        }
+        this.setState({ isFocused: doHighlight }, () => {
+            this.props.onDoubleClickNode && this.props.onDoubleClickNode(node);
+        });
+    }
+
+    onClickNode = node => {
+        this.props.onClickNode && this.props.onClickNode(node);
+    };
+
+    onDoubleClickNode = node => {
+        //
     };
 
     onMouseOverNode = node => {
-        this.props.onMouseOverNode && this.props.onMouseOverNode(node);
+        console.log('onMouseOverNode');
+        // this.props.onMouseOverNode && this.props.onMouseOverNode(node);
         // this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(id, true);
+        this._highlightOn(node);
     };
 
     onMouseOutNode = node => {
-        this.props.onMouseOutNode && this.props.onMouseOutNode(node);
+        console.log('onMouseOutNode');
+        // this.props.onMouseOutNode && this.props.onMouseOutNode(node);
         // this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(id, false);
+        this._highlightOff(node);
+        this.restartSimulation();
     };
 
     onMouseOverLink = (source, target) => {
-        this.props.onMouseOverLink && this.props.onMouseOverLink(source, target);
-
+        this.props.onMouseOverLink && this.props.onMouseOverLink(source, target)
         // if (this.state.config.linkHighlightBehavior) {
         //     this.state.highlightedLink = { source, target };
         //     this._tick();
@@ -129,7 +146,6 @@ export default class Graph extends React.Component {
 
     onMouseOutLink = (source, target) => {
         this.props.onMouseOutLink && this.props.onMouseOutLink(source, target);
-
         // if (this.state.config.linkHighlightBehavior) {
         //     this.state.highlightedLink = undefined;
         //     this._tick();
@@ -180,12 +196,10 @@ export default class Graph extends React.Component {
             !utils.isObjectEmpty(nextProps.config) && !utils.isDeepEqual(nextProps.config, this.state.config);
         const state = newGraphElements ? graphHelper.initializeGraphState(nextProps, this.state) : this.state;
         const config = configUpdated ? utils.merge(DEFAULT_CONFIG, nextProps.config || {}) : this.state.config;
-
         // in order to properly update graph data we need to pause eventual d3 ongoing animations
         newGraphElements && this.pauseSimulation();
 
         const transform = nextProps.config.panAndZoom !== this.state.config.panAndZoom ? 1 : this.state.transform;
-
         this.setState({
             ...state,
             config,
