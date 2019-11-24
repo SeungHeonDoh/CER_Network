@@ -16,7 +16,7 @@ export default class Link extends React.Component {
         const lineStyle = {
             strokeWidth: this.props.strokeWidth,
             stroke: this.props.stroke,
-            opacity: this.props.opacity
+            strokeOpacity: this.props.opacity,
         };
 
         const lineProps = {

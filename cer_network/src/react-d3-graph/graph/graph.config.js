@@ -38,6 +38,7 @@ export default {
         opacity: 1,
         semanticStrokeWidth: false,
         strokeWidth: 1.5,
-        highlightColor: '#d3d3d3'
+        highlightColor: '#d3d3d3',
+        opacityKey: undefined,
     }
 };

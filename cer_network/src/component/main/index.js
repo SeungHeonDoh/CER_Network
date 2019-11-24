@@ -11,15 +11,19 @@ export default function Main() {
     const [ config, setConfig ] = useState({
     });
     const graphConfig = createConfig({
+        isDarkTheme: false,
         node: {
             symbolType: 'diamond'
+        },
+        link: {
+            opacityKey: 'strength',
         },
         graph: {
             symbolKey: 'level',
             symbolMapper: {
                 1: 'cross',
                 2: 'circle',
-            }
+            },
         }
     });
 
