@@ -20,10 +20,15 @@ export default function Main() {
         },
         graph: {
             symbolKey: 'level',
+            colorKey: 'level',
             symbolMapper: {
                 1: 'cross',
                 2: 'circle',
             },
+            colorMapper: {
+                1: '#d3d3d3',
+                2: '#000000',
+            }
         }
     });
 

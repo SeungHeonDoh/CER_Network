@@ -200,7 +200,14 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
         (node.id === (highlightedLink && highlightedLink.source) ||
             node.id === (highlightedLink && highlightedLink.target));
     const opacity = _getNodeOpacity(node, highlightedNode, highlightedLink, config);
-    let fill = node.color || config.node.color;
+    
+    var fill;
+    
+    if(config.colorKey == undefined){
+        fill = node.color || config.node.color;
+    } else {
+        fill = node.color || config.colorMapper[node[config.colorKey]];
+    }
 
     if (highlight && config.node.highlightColor !== CONST.KEYWORDS.SAME) {
         fill = config.node.highlightColor;
