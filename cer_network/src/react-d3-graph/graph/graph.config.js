@@ -10,9 +10,10 @@ export default {
     panAndZoom: false,
     staticGraph: false,
     width: 800,
-    symbolMapper: {
-    },
+    symbolMapper: {},
+    colorMapper: {},
     symbolKey: undefined,
+    colorKey: undefined,
     node: {
         color: '#d3d3d3',
         fontColor: 'black',
@@ -38,6 +39,7 @@ export default {
         opacity: 1,
         semanticStrokeWidth: false,
         strokeWidth: 1.5,
-        highlightColor: '#d3d3d3'
+        highlightColor: '#d3d3d3',
+        opacityKey: undefined,
     }
 };
