@@ -3,6 +3,7 @@ import useNetwork from '../../hook';
 import D3Graph from '../../D3Graph/D3Graph';
 import dummy from '../../utils/data';
 import { createConfig } from '../../D3Graph/D3Graph.config';
+import { RenderArea } from '../../styles';
 
 
 export default function Main() {
@@ -27,7 +28,7 @@ export default function Main() {
             },
             colorMapper: {
                 1: '#d3d3d3',
-                2: '#000000',
+                2: 'white',
             }
         }
     });
@@ -40,13 +41,13 @@ export default function Main() {
     }, [])
     
     return (
-        <div>
+        <RenderArea>
             <D3Graph 
                 data={data}
                 config={config}
                 loading={loading}
             />
-        </div>
+        </RenderArea>
     )
 
 }

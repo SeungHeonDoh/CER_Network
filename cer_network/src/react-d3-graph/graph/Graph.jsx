@@ -12,6 +12,7 @@ import ERRORS from '../err';
 import * as graphRenderer from './graph.renderer';
 import * as graphHelper from './graph.helper';
 import utils from '../utils';
+import { GraphArea } from '../../styles/graph';
 
 // Some d3 constant values
 const D3_CONST = {
@@ -265,14 +266,14 @@ export default class Graph extends React.Component {
         };
 
         return (
-            <div id={`${this.state.id}-${CONST.GRAPH_WRAPPER_ID}`}>
+            <GraphArea id={`${this.state.id}-${CONST.GRAPH_WRAPPER_ID}`}>
                 <svg style={svgStyle}>
                     <g id={`${this.state.id}-${CONST.GRAPH_CONTAINER_ID}`}>
                         {links}
                         {nodes}
                     </g>
                 </svg>
-            </div>
+            </GraphArea>
         );
     }
 }

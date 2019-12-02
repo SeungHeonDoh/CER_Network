@@ -9,7 +9,7 @@ export default {
     nodeHighlightBehavior: false,
     panAndZoom: false,
     staticGraph: false,
-    width: 800,
+    width: 300,
     symbolMapper: {},
     colorMapper: {},
     symbolKey: undefined,
