@@ -23,12 +23,12 @@ export default function Main() {
             symbolKey: 'level',
             colorKey: 'level',
             symbolMapper: {
-                1: 'cross',
+                1: 'circle',
                 2: 'circle',
             },
             colorMapper: {
-                1: '#d3d3d3',
-                2: 'white',
+                1: '#ff00de',
+                2: '#2a00ff',
             }
         }
     });

@@ -35,7 +35,7 @@ function _getNodeOpacity(node, highlightedNode, highlightedLink, config) {
         (highlightedLink && highlightedLink.source && highlightedLink.target)
     );
     let opacity;
-
+    
     if (someNodeHighlighted && config.highlightDegree === 0) {
         opacity = highlight ? config.node.opacity : config.highlightOpacity;
     } else if (someNodeHighlighted) {

@@ -27,7 +27,7 @@ const getDefaultConfig = (themeType) => {
         graph: {
             nodeHighlightBehavior: true,
             automaticRearrangeAfterDropNode: true,
-            highlightOpacity: 0.2,
+            highlightOpacity: 0.5,
             height: window.innerHeight,
             width: window.innerWidth,
             symbolMapper: {
