@@ -7,7 +7,7 @@ import { RenderArea } from '../../styles';
 
 
 export default function Main() {
-    var { nodes } = useNetwork();
+    const { setActivateNode, activated } = useNetwork();
     const [ loading, setLoading ] = useState(true);
     const [ config, setConfig ] = useState({
     });
@@ -46,6 +46,7 @@ export default function Main() {
                 data={data}
                 config={config}
                 loading={loading}
+                setActivateNode={setActivateNode}
             />
         </RenderArea>
     )

@@ -14,6 +14,7 @@ import * as graphHelper from './graph.helper';
 import utils from '../utils';
 import { GraphArea } from '../../styles/graph';
 
+
 // Some d3 constant values
 const D3_CONST = {
     FORCE_LINK_STRENGTH: 1,
@@ -99,6 +100,7 @@ export default class Graph extends React.Component {
         }
         this.setState({ isFocused: doHighlight }, () => {
             this.props.onDoubleClickNode && this.props.onDoubleClickNode(node);
+            this.props.setActivateNode(node);
         });
     }
 
@@ -123,14 +125,12 @@ export default class Graph extends React.Component {
     };
 
     onMouseOverNode = node => {
-        console.log('onMouseOverNode');
         // this.props.onMouseOverNode && this.props.onMouseOverNode(node);
         // this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(id, true);
         this._highlightOn(node);
     };
 
     onMouseOutNode = node => {
-        console.log('onMouseOutNode');
         // this.props.onMouseOutNode && this.props.onMouseOutNode(node);
         // this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(id, false);
         this._highlightOff(node);

@@ -128,6 +128,7 @@ class D3Graph extends Component {
             onDoubleClickNode: this.onDoubleClickNode,
             onMouseOverNode: this.onMouseOverNode,
             onMouseOutNode: this.onMouseOutNode,
+            setActivateNode: this.props.setActivateNode,
         };
         return (
             <main className={classes.content}>

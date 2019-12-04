@@ -3,10 +3,19 @@ import { NetworkContext } from '../context';
 
 const useNetwork = () => {
     const [ networkState, setNetworkState ] = useContext(NetworkContext);
-    console.log(networkState);
+
+    function setActivateNode(node){
+        console.log(node);
+        setNetworkState((prev) => ({
+            ...prev,
+            activated: node,
+        }))
+    }
 
     return {
-        nodes: networkState.nodes
+        data: networkState.data,
+        activated: networkState.activated,
+        setActivateNode,
     }
 }
 

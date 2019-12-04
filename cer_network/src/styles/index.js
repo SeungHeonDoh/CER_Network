@@ -13,6 +13,7 @@ export const DescriptionArea = styled.div `
     background-color: #191919;
     top: 0px;
     position: relative;
+    color: white;
 `
 
 export const Page = styled.div `
