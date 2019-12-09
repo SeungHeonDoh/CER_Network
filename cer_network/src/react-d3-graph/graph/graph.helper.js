@@ -7,9 +7,9 @@ import {
 
 import CONST from './graph.const';
 import DEFAULT_CONFIG from './graph.config';
-import ERRORS from '../../err';
+import ERRORS from '../err';
 
-import utils from '../../utils';
+import utils from '../utils';
 
 const NODE_PROPS_WHITELIST = ['id', 'highlighted', 'x', 'y', 'index', 'vy', 'vx'];
 
@@ -35,7 +35,7 @@ function _getNodeOpacity(node, highlightedNode, highlightedLink, config) {
         (highlightedLink && highlightedLink.source && highlightedLink.target)
     );
     let opacity;
-
+    
     if (someNodeHighlighted && config.highlightDegree === 0) {
         opacity = highlight ? config.node.opacity : config.highlightOpacity;
     } else if (someNodeHighlighted) {
@@ -59,9 +59,17 @@ function _initializeLinks(graphLinks) {
         if (!links[target]) {
             links[target] = {};
         }
+        const keys = Object.keys(l);
+        
+        var linkProperty = {}
+        for(var i=0; i < keys.length; i++){
+            if(!['source', 'target'].includes(keys[i])){
+                linkProperty[keys[i]] = l[keys[i]];
+            }
+        }
 
         // @TODO: If the graph is directed this should be adapted
-        links[source][target] = links[target][source] = l.value || 1;
+        links[source][target] = links[target][source] = linkProperty;
 
         return links;
     }, {});
@@ -121,6 +129,7 @@ function buildLinkProps(
     highlightedLink,
     transform
 ) {
+
     const x1 = (nodes[source] && nodes[source].x) || 0;
     const y1 = (nodes[source] && nodes[source].y) || 0;
     const x2 = (nodes[target] && nodes[target].x) || 0;
@@ -146,10 +155,13 @@ function buildLinkProps(
         target === (highlightedLink && highlightedLink.target);
     const highlight = reasonNode || reasonLink;
 
-    let opacity = config.link.opacity;
-
+    var opacity = config.link.opacity;
+    if(config.link.opacityKey !== undefined){
+        opacity = links[source][target][config.link.opacityKey]
+    }
+    
     if (highlightedNode || (highlightedLink && highlightedLink.source)) {
-        opacity = highlight ? config.link.opacity : config.highlightOpacity;
+        opacity = highlight?opacity:config.highlightOpacity;
     }
 
     let stroke = config.link.color;
@@ -162,7 +174,6 @@ function buildLinkProps(
 
     if (config.link.semanticStrokeWidth) {
         const linkValue = links[source][target] || links[target][source] || 1;
-
         strokeWidth += linkValue * strokeWidth / 10;
     }
 
@@ -189,7 +200,14 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
         (node.id === (highlightedLink && highlightedLink.source) ||
             node.id === (highlightedLink && highlightedLink.target));
     const opacity = _getNodeOpacity(node, highlightedNode, highlightedLink, config);
-    let fill = node.color || config.node.color;
+    
+    var fill;
+    
+    if(config.colorKey == undefined){
+        fill = node.color || config.node.color;
+    } else {
+        fill = node.color || config.colorMapper[node[config.colorKey]];
+    }
 
     if (highlight && config.node.highlightColor !== CONST.KEYWORDS.SAME) {
         fill = config.node.highlightColor;
@@ -208,6 +226,13 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
     const strokeWidth = highlight ? config.node.highlightStrokeWidth : config.node.strokeWidth;
     const svg = node.svg || config.node.svg;
     const fontColor = node.fontColor || config.node.fontColor;
+
+    let type;
+    if(config.symbolKey == undefined){
+        type = node.symbolType || config.node.symbolType;
+    }else{
+        type = node.symbolType || config.symbolMapper[node[config.symbolKey]];
+    }
 
     return {
         className: CONST.NODE_CLASS_NAME,
@@ -232,7 +257,7 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
         stroke,
         strokeWidth: strokeWidth * t,
         svg,
-        type: node.symbolType || config.node.symbolType
+        type,
     };
 }
 // Graph init
@@ -263,7 +288,6 @@ function initializeGraphState({ data, id, config }, state) {
     }
 
     graph.links = data.links.map(l => Object.assign({}, l));
-
     let newConfig = Object.assign({}, utils.merge(DEFAULT_CONFIG, config || {}));
     let nodes = _initializeNodes(graph.nodes);
     let links = _initializeLinks(graph.links); // matrix of graph connections

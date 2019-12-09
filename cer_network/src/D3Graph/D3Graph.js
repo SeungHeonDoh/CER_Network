@@ -72,6 +72,28 @@ class D3Graph extends Component {
         }
     }
 
+    onMouseOverNode = node => {
+        console.log("mouse in");
+        const presentDrawer = this.state.presentDrawer;
+        if (!presentDrawer) {
+            this.setState({
+                highlightedNode: node,
+                presentDrawer: true 
+            });
+        }
+    }
+
+    onMouseOutNode = node => {
+        console.log("mouse out");
+        const presentDrawer = this.state.presentDrawer;
+        if (presentDrawer) {
+            this.setState({
+                highlightedNode: node,
+                drawerOpen: !this.state.drawerOpen,
+            });
+        }
+    }
+
     handleClose = () => {
         this.setState({
             drawerOpen: false,
@@ -106,6 +128,7 @@ class D3Graph extends Component {
             onDoubleClickNode: this.onDoubleClickNode,
             onMouseOverNode: this.onMouseOverNode,
             onMouseOutNode: this.onMouseOutNode,
+            setActivateNode: this.props.setActivateNode,
         };
         return (
             <main className={classes.content}>

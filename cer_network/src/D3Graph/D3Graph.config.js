@@ -27,9 +27,12 @@ const getDefaultConfig = (themeType) => {
         graph: {
             nodeHighlightBehavior: true,
             automaticRearrangeAfterDropNode: true,
-            highlightOpacity: 0.2,
+            highlightOpacity: 0.5,
             height: window.innerHeight,
             width: window.innerWidth,
+            symbolMapper: {
+            },
+            symbolKey: undefined,
         },
         node: {
             color: theme[themeType].node.color,
@@ -47,9 +50,21 @@ const getDefaultConfig = (themeType) => {
 function createConfig(newConfig = {}, darkTheme = false) {
     const themeType = darkTheme ? 'dark' : 'light';
     const defaultConfig = getDefaultConfig(themeType);
+
+    var newGraphConfig;
+    if(newConfig.hasOwnProperty('graph')){
+        newGraphConfig = newConfig.graph;
+    }else{
+        const copiedNewConfig = {...newConfig};
+        delete copiedNewConfig['node'];
+        delete copiedNewConfig['link'];
+        newGraphConfig = copiedNewConfig;
+    }
+
+
     const mergedConfig = {
         ...defaultConfig.graph,
-        ...newConfig.graph,
+        ...newGraphConfig,
         node: {
             ...defaultConfig.node,
             ...newConfig.node,

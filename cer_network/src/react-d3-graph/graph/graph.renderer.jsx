@@ -4,7 +4,7 @@ import React from 'react';
 import CONST from './graph.const';
 
 import Link from '../link/Link';
-import Node from '../node/Node';
+import Node from '../node/node';
 import {
     buildLinkProps,
     buildNodeProps
@@ -49,7 +49,6 @@ function buildGraph(nodes, nodeCallbacks, links, linkCallbacks, config, highligh
 
     for (let i = 0, keys = Object.keys(nodes), n = keys.length; i < n; i++) {
         const nodeId = keys[i];
-
         const props = buildNodeProps(nodes[nodeId], config, nodeCallbacks,
                                         highlightedNode, highlightedLink, transform);
 

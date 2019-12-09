@@ -9,7 +9,11 @@ export default {
     nodeHighlightBehavior: false,
     panAndZoom: false,
     staticGraph: false,
-    width: 800,
+    width: 300,
+    symbolMapper: {},
+    colorMapper: {},
+    symbolKey: undefined,
+    colorKey: undefined,
     node: {
         color: '#d3d3d3',
         fontColor: 'black',
@@ -22,19 +26,20 @@ export default {
         highlightStrokeWidth: 1.5,
         labelProperty: 'id',
         mouseCursor: 'pointer',
-        opacity: 1,
+        opacity: 1.0,
         renderLabel: true,
-        size: 200,
+        size: 140,
         strokeColor: 'none',
         strokeWidth: 1.5,
         svg: '',
         symbolType: 'circle'
     },
     link: {
-        color: '#d3d3d3',
-        opacity: 1,
+        color: 'none',
+        opacity: 1.0,
         semanticStrokeWidth: false,
         strokeWidth: 1.5,
-        highlightColor: '#d3d3d3'
+        highlightColor: '#d3d3d3',
+        opacityKey: undefined,
     }
 };

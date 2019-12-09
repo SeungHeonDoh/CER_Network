@@ -1,5 +1,5 @@
 module.exports = {
-    baseNodes : [
+    nodes : [
         { id: "MacLAB", group: 0, label: "MacLAB", level: 1 },
         { id: "도승헌"   , group: 0, label: "도승헌"   , level: 2 },
         { id: "Design"   , group: 0, label: "Design"   , level: 2 },
@@ -21,7 +21,7 @@ module.exports = {
         { id: "김민채"  , group: 2, label: "김민채"   , level: 2 },
         { id: "강상권"  , group: 2, label: "강상권"  , level: 2 }
       ],
-    baseLinks : [
+      links : [
         { target: "MacLAB", source: "도승헌" , strength: 0.5 },
         { target: "MacLAB", source: "김태완" , strength: 0.5 },
         { target: "MacLAB", source: "이종필" , strength: 0.5 },
