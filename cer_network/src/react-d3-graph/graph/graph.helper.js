@@ -219,8 +219,14 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
         stroke = config.node.highlightStrokeColor;
     }
 
+    var nodeSize;
+    if(config.colorKey == undefined){
+        nodeSize = node.size || config.node.size;
+    }  else {
+        nodeSize = node.size || config.sizeMapper[node[config.sizeKey]];
+    }
+
     const t = 1 / transform;
-    const nodeSize = node.size || config.node.size;
     const fontSize = highlight ? config.node.highlightFontSize : config.node.fontSize;
     const dx = fontSize * t + nodeSize / 100 + 1.5;
     const strokeWidth = highlight ? config.node.highlightStrokeWidth : config.node.strokeWidth;

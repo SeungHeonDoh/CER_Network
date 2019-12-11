@@ -22,6 +22,7 @@ export default function Main() {
         graph: {
             symbolKey: 'Group',
             colorKey: 'Group',
+            sizeKey: 'Group',
             symbolMapper: {
                 'word': 'circle',
                 'project': 'circle',
@@ -31,6 +32,11 @@ export default function Main() {
                 'artist': '#ff00de',
                 'project': '#2a00ff',
                 'word': 'gray'
+            },
+            sizeMapper: {
+                'artist': 80,
+                'project': 80,
+                'word': 20
             }
         }
     });

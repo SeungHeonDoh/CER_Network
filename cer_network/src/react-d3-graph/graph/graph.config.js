@@ -12,8 +12,10 @@ export default {
     width: 300,
     symbolMapper: {},
     colorMapper: {},
+    sizeMapper: {},
     symbolKey: undefined,
     colorKey: undefined,
+    sizeKey: undefined,
     node: {
         color: '#d3d3d3',
         fontColor: 'black',
