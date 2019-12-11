@@ -233,12 +233,11 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
     }else{
         type = node.symbolType || config.symbolMapper[node[config.symbolKey]];
     }
-
     return {
         className: CONST.NODE_CLASS_NAME,
         cursor: config.node.mouseCursor,
-        cx: (node && node.x) || '0',
-        cy: (node && node.y) || '0',
+        cx: (node && node.x*10 + config.width/2-300) || '0',
+        cy: (node && node.y*8 + config.height/2) || '0',
         fill,
         fontColor,
         fontSize: fontSize * t,

@@ -7,7 +7,7 @@ import { RenderArea } from '../../styles';
 
 
 export default function Main() {
-    const { setActivateNode, activated } = useNetwork();
+    const { setActivateNode, loadGraphData, data } = useNetwork();
     const [ loading, setLoading ] = useState(true);
     const [ config, setConfig ] = useState({
     });
@@ -20,25 +20,30 @@ export default function Main() {
             opacityKey: 'strength',
         },
         graph: {
-            symbolKey: 'level',
-            colorKey: 'level',
+            symbolKey: 'Group',
+            colorKey: 'Group',
             symbolMapper: {
-                1: 'circle',
-                2: 'circle',
+                'word': 'circle',
+                'project': 'circle',
+                'artist': 'circle',
             },
             colorMapper: {
-                1: '#ff00de',
-                2: '#2a00ff',
+                'artist': '#ff00de',
+                'project': '#2a00ff',
+                'word': 'gray'
             }
         }
     });
 
-    const [ data, setData ] = useState(null);
     useEffect(() => {
-        setData(dummy);
-        setConfig(graphConfig);
-        setLoading(false);
+        handleLoadData();
     }, [])
+
+    async function handleLoadData(){
+        setConfig(graphConfig);
+        await loadGraphData();
+        setLoading(false);
+    }
     
     return (
         <RenderArea>

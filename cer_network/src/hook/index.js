@@ -12,10 +12,22 @@ const useNetwork = () => {
         }))
     }
 
+    async function loadGraphData(path){
+        var nodes = await require('../data/node.json');
+        setNetworkState((prev) => ({
+            ...prev,
+            data: {
+                nodes,
+                links: []
+            },
+        }))
+    }
+
     return {
         data: networkState.data,
         activated: networkState.activated,
         setActivateNode,
+        loadGraphData,
     }
 }
 
