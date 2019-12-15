@@ -7,7 +7,8 @@ const NetworkProvider = (props) => {
     const [ state, setState ] = useState({
         data: {
         },
-        activated: null
+        activated: null,
+        activateFunction: null
     });
     return (
         <NetworkContext.Provider value={[state, setState]}>

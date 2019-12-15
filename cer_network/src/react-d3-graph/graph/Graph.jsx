@@ -183,6 +183,8 @@ export default class Graph extends React.Component {
 
         this.state = graphHelper.initializeGraphState(this.props, this.state);
         this.state.isFocused = false;
+ 
+        this.props.setActivateFunction(this._highlightOn);
     }
 
     componentWillReceiveProps(nextProps) {

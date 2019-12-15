@@ -227,11 +227,16 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
     }
 
     const t = 1 / transform;
-    const fontSize = highlight ? config.node.highlightFontSize : config.node.fontSize;
-    const dx = fontSize * t + nodeSize / 100 + 1.5;
+    var fontSize = highlight ? config.node.highlightFontSize : config.node.fontSize;
+    var dx = fontSize * t + nodeSize / 100 + 1.5;
     const strokeWidth = highlight ? config.node.highlightStrokeWidth : config.node.strokeWidth;
     const svg = node.svg || config.node.svg;
-    const fontColor = node.fontColor || config.node.fontColor;
+    var fontColor = node.fontColor || config.node.fontColor;
+    
+    if (highlight) {
+        nodeSize *= 2;
+        fontColor = "lightgreen"
+    }
 
     let type;
     if(config.symbolKey == undefined){
@@ -242,8 +247,8 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
     return {
         className: CONST.NODE_CLASS_NAME,
         cursor: config.node.mouseCursor,
-        cx: (node && node.x*10 + config.width/2-300) || '0',
-        cy: (node && node.y*8 + config.height/2) || '0',
+        cx: (node && node.x*6 + config.width/2-300) || '0',
+        cy: (node && node.y*5 + config.height/2) || '0',
         fill,
         fontColor,
         fontSize: fontSize * t,

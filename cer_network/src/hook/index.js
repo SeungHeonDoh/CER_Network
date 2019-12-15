@@ -5,7 +5,6 @@ const useNetwork = () => {
     const [ networkState, setNetworkState ] = useContext(NetworkContext);
 
     function setActivateNode(node){
-        console.log(node);
         setNetworkState((prev) => ({
             ...prev,
             activated: node,
@@ -13,7 +12,7 @@ const useNetwork = () => {
     }
 
     async function loadGraphData(path){
-        var nodes = await require('../data/node.json');
+        var nodes = await require('../data/node_v0.1.json');
         setNetworkState((prev) => ({
             ...prev,
             data: {
@@ -23,11 +22,30 @@ const useNetwork = () => {
         }))
     }
 
+    function setActivateFunction(activateFunction){
+        setNetworkState((prev) => ({
+            ...prev,
+            activateFunction
+        }))
+    }
+
+    function changeActivate(id){
+        for(var i=0; i<networkState.data.nodes.length; i++){
+            var node = networkState.data.nodes[i];
+            if(node.id === id){
+                networkState.activateFunction(node)
+                return
+            }
+        }
+    }
+
     return {
         data: networkState.data,
         activated: networkState.activated,
         setActivateNode,
         loadGraphData,
+        setActivateFunction,
+        changeActivate,
     }
 }
 
