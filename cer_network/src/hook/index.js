@@ -29,13 +29,9 @@ const useNetwork = () => {
         }))
     }
 
-    function changeActivate(id){
-        for(var i=0; i<networkState.data.nodes.length; i++){
-            var node = networkState.data.nodes[i];
-            if(node.id === id){
-                networkState.activateFunction(node)
-                return
-            }
+    function changeActivate(node){
+        if(node !== undefined){
+            networkState.activateFunction(node);
         }
     }
 

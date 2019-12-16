@@ -1,41 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash'
 import useNetwork from '../../hook';
-import { SearchBar, SearchInput } from '../../styles';
-import { Search as SearchLib } from 'semantic-ui-react'
+import { SearchBar, SearchInput, SearchResults, SearchItem } from '../../styles';
+
 
 export default function Search(){
     const { changeActivate, data } = useNetwork();
     const [ input, setInput ] = useState('');
-    const [ result, setResult ] = useState();
+    const [ results, setResults ] = useState([]);
 
     useEffect(() => {
         handleSearchChange(null, input);
     }, [input])
 
+    function reset(){
+        setInput('');
+        setResults([]);
+    }
+
     function onChangeEvent(event){
         setInput(event.target.value);
     }
 
+    function handleClickItem(node){
+        changeActivate(node);
+        reset()
+    }
+
     function onEnterEvent(event){
         if(event.key === 'Enter'){
-            changeActivate(input);
-            setInput('');
+            if(results.length>0){
+                changeActivate(results[0]);
+            }
+            reset()
         }
     }
 
     function handleSearchChange(e, value){
         setTimeout(() => {
             if (value.length < 1) {
-
                 return
             }
       
             const re = new RegExp(_.escapeRegExp(value), 'i')
-            const isMatch = (result) => re.test(result.id)
-            const res = _.filter(data.nodes, isMatch)
-            console.log(res);
-            setResult(res);
+            const isMatch = (results) => re.test(results.id)
+            const res = _.filter(data.nodes, isMatch).slice(0, 5);
+            setResults(res);
         }, 300)
     }
 
@@ -47,12 +57,17 @@ export default function Search(){
                 onChange={onChangeEvent}
                 onKeyPress={onEnterEvent}
             />
-            <SearchLib
-                onSearchChange={_.debounce(handleSearchChange, 500, {
-                  leading: true,
+            <SearchResults>
+                {results.map((result) => {
+                    return (
+                        <SearchItem
+                            onClick={()=>{handleClickItem(result)}}
+                        >
+                            {result.id}
+                        </SearchItem>
+                    )
                 })}
-                hidden={true}
-            />
+            </SearchResults>
         </SearchBar>
     )
 }
