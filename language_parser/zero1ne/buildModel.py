@@ -12,7 +12,7 @@ from konlpy.tag import Okt
 print('gensim  version = {}'.format(gensim.__version__))
 print('sklearn version = {}'.format(sklearn.__version__))
 
-dataset_path = 'kor_data.csv'
+dataset_path = './dataset/kor_data.csv'
 remove_item = ('','Conjunction','Verb','Determiner', 'Exclamation','Josa','Punctuation','Suffix', 'Foreign', 'Number','Adverb')
 pos_tagger = Okt()
 
@@ -44,7 +44,8 @@ def main(dataset_path, remove_item, vector_size=100, window=10, min_count=1, epo
     #Update the model’s neural weights from a sequence of sentences
     model.train(tagged_data, epochs=model.epochs, total_examples=model.corpus_count)
 
-    with open('model.pkl', 'wb') as f:
+    with open('./dataset/model.pkl', 'wb') as f:
         pickle.dump(model, f)
 
 main(dataset_path, remove_item)
+print("Finish Build Model")
