@@ -3,10 +3,45 @@ import { NetworkContext } from '../context';
 
 const useNetwork = () => {
     const [ networkState, setNetworkState ] = useContext(NetworkContext);
-    console.log(networkState);
+
+    function setActivateNode(node){
+        setNetworkState((prev) => ({
+            ...prev,
+            activated: node,
+        }))
+    }
+
+    async function loadGraphData(path){
+        var nodes = await require('../data/node_v0.1.json');
+        setNetworkState((prev) => ({
+            ...prev,
+            data: {
+                nodes,
+                links: []
+            },
+        }))
+    }
+
+    function setActivateFunction(activateFunction){
+        setNetworkState((prev) => ({
+            ...prev,
+            activateFunction
+        }))
+    }
+
+    function changeActivate(node){
+        if(node !== undefined){
+            networkState.activateFunction(node);
+        }
+    }
 
     return {
-        nodes: networkState.nodes
+        data: networkState.data,
+        activated: networkState.activated,
+        setActivateNode,
+        loadGraphData,
+        setActivateFunction,
+        changeActivate,
     }
 }
 

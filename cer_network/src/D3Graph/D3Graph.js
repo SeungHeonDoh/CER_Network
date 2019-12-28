@@ -76,7 +76,10 @@ class D3Graph extends Component {
         console.log("mouse in");
         const presentDrawer = this.state.presentDrawer;
         if (!presentDrawer) {
-            this.setState({ presentDrawer: true });
+            this.setState({
+                highlightedNode: node,
+                presentDrawer: true 
+            });
         }
     }
 
@@ -125,6 +128,8 @@ class D3Graph extends Component {
             onDoubleClickNode: this.onDoubleClickNode,
             onMouseOverNode: this.onMouseOverNode,
             onMouseOutNode: this.onMouseOutNode,
+            setActivateNode: this.props.setActivateNode,
+            setActivateFunction: this.props.setActivateFunction,
         };
         return (
             <main className={classes.content}>

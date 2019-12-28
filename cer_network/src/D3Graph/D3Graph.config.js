@@ -27,7 +27,7 @@ const getDefaultConfig = (themeType) => {
         graph: {
             nodeHighlightBehavior: true,
             automaticRearrangeAfterDropNode: true,
-            highlightOpacity: 0.2,
+            highlightOpacity: 0.5,
             height: window.innerHeight,
             width: window.innerWidth,
             symbolMapper: {
@@ -39,7 +39,7 @@ const getDefaultConfig = (themeType) => {
             highlightColor: theme[themeType].node.highlightColor,
             fontColor: theme[themeType].node.fontColor,
             labelProperty: 'name',
-            size: 200,
+            size: 20,
         },
         link: {
             highlightColor: theme[themeType].link.highlightColor,

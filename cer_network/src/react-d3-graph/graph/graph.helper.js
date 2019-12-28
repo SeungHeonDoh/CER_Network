@@ -35,7 +35,7 @@ function _getNodeOpacity(node, highlightedNode, highlightedLink, config) {
         (highlightedLink && highlightedLink.source && highlightedLink.target)
     );
     let opacity;
-
+    
     if (someNodeHighlighted && config.highlightDegree === 0) {
         opacity = highlight ? config.node.opacity : config.highlightOpacity;
     } else if (someNodeHighlighted) {
@@ -219,13 +219,24 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
         stroke = config.node.highlightStrokeColor;
     }
 
+    var nodeSize;
+    if(config.colorKey == undefined){
+        nodeSize = node.size || config.node.size;
+    }  else {
+        nodeSize = node.size || config.sizeMapper[node[config.sizeKey]];
+    }
+
     const t = 1 / transform;
-    const nodeSize = node.size || config.node.size;
-    const fontSize = highlight ? config.node.highlightFontSize : config.node.fontSize;
-    const dx = fontSize * t + nodeSize / 100 + 1.5;
+    var fontSize = highlight ? config.node.highlightFontSize : config.node.fontSize;
+    var dx = fontSize * t + nodeSize / 100 + 1.5;
     const strokeWidth = highlight ? config.node.highlightStrokeWidth : config.node.strokeWidth;
     const svg = node.svg || config.node.svg;
-    const fontColor = node.fontColor || config.node.fontColor;
+    var fontColor = node.fontColor || config.node.fontColor;
+    
+    if (highlight) {
+        nodeSize *= 2;
+        fontColor = "lightgreen"
+    }
 
     let type;
     if(config.symbolKey == undefined){
@@ -233,12 +244,11 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
     }else{
         type = node.symbolType || config.symbolMapper[node[config.symbolKey]];
     }
-
     return {
         className: CONST.NODE_CLASS_NAME,
         cursor: config.node.mouseCursor,
-        cx: (node && node.x) || '0',
-        cy: (node && node.y) || '0',
+        cx: (node && node.x*6 + config.width/2-300) || '0',
+        cy: (node && node.y*5 + config.height/2) || '0',
         fill,
         fontColor,
         fontSize: fontSize * t,
