@@ -37,11 +37,11 @@ export default {
         symbolType: 'circle'
     },
     link: {
-        color: 'none',
-        opacity: 1.0,
+        color: '#d3d3d3',
+        opacity: 0.3,
         semanticStrokeWidth: false,
-        strokeWidth: 1.5,
-        highlightColor: '#d3d3d3',
+        strokeWidth: 0.5,
+        highlightColor: 'lightgreen',
         opacityKey: undefined,
     }
 };

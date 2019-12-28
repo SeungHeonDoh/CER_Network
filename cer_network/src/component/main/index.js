@@ -18,6 +18,7 @@ export default function Main() {
         },
         link: {
             opacityKey: 'strength',
+            highlightColor: 'lightgreen'
         },
         graph: {
             symbolKey: 'Group',
