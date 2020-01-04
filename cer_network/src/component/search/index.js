@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash'
 import useNetwork from '../../hook';
-import { SearchBar, SearchInput, SearchResults, SearchItem } from '../../styles';
+import { SearchBar, SearchInput, SearchResults, SearchItem, SearchItemTitle, SearchItemValue } from '../../styles';
 
+
+
+const TitleMapper = {
+    artist: "Artist",
+    project: "Project",
+    word: "Keyword"
+}
 
 export default function Search(){
     const { changeActivate, data } = useNetwork();
@@ -58,15 +65,36 @@ export default function Search(){
                 onKeyPress={onEnterEvent}
             />
             <SearchResults>
+                <tbody>
                 {results.map((result) => {
+                    console.log(result);
+                    let hasKeyword = false;
+                    if(result.hasOwnProperty("attritube")){
+                        hasKeyword = result.attritube.hasOwnProperty('key_list');
+                    }
                     return (
                         <SearchItem
+                            key={result.id}
                             onClick={()=>{handleClickItem(result)}}
                         >
-                            {result.id}
+                            <SearchItemTitle>
+                                {TitleMapper[result.Group]}
+                            </SearchItemTitle>
+                            <SearchItemValue>
+                                {result.id}
+                            </SearchItemValue>
+                            <SearchItemTitle>
+                                {hasKeyword?"Keyword":""}
+                            </SearchItemTitle>
+                            <SearchItemValue
+                                width="100%"
+                            >
+                                {hasKeyword?result.attritube.key_list.join():""}
+                            </SearchItemValue>
                         </SearchItem>
                     )
                 })}
+                </tbody>
             </SearchResults>
         </SearchBar>
     )

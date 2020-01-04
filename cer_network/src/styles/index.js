@@ -1,10 +1,23 @@
 import styled from 'styled-components'
 
+export const SearchItemValue = styled.th `
+    width: ${(props) => props.width? props.width: "15%"};
+    font-size: 15px;
+    text-align: left;
+`
 
 
-export const SearchItem = styled.div `
+export const SearchItemTitle = styled.th `
+    width: 10%;
+    font-size: 15px;
+    opacity: 0.5;
+    text-align: left;
+    padding-left: 20px;
+    padding-bottom: 1.5em;
+    padding-top: 1.5em;
+`
 
-    padding: 10px;
+export const SearchItem = styled.tr `
     background-color: rgb(26, 26, 26, 0.5);
     border-bottom: solid 1px white;
     width: 100%;
@@ -15,7 +28,7 @@ export const SearchItem = styled.div `
     }
 
 `
-export const SearchResults = styled.div `
+export const SearchResults = styled.table `
     position: absolute;
     top: 72px;
     left: 0px;
