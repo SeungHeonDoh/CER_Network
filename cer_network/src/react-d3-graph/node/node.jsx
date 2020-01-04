@@ -71,7 +71,7 @@ export default class Node extends React.Component {
             nodeProps.strokeWidth = this.props.strokeWidth;
             label = <text {...textProps}>{this.props.label}</text>;
             node = <path {...nodeProps} />;
-            circle = <circle r={size/9+2} fill="none" stroke={this.props.fill}/>;
+            circle = <circle r={size/9+2} fill="none" stroke={this.props.fill} opacity={this.props.opacity}/>;
         }
 
         const gProps = {
