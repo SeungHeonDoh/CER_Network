@@ -1,8 +1,12 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { NetworkContext } from '../context';
 
 const useNetwork = () => {
     const [ networkState, setNetworkState ] = useContext(NetworkContext);
+
+    useEffect(() => {
+        loadGraphData();
+    }, [networkState.activated])
 
     function setActivateNode(node){
         setNetworkState((prev) => ({
@@ -11,18 +15,14 @@ const useNetwork = () => {
         }))
     }
 
-    async function loadGraphData(path){
+    async function loadGraphData(){
         const nodes = await require('../data/node_v0.0.json');
         const links = await require('../data/link_v0.0.json');
         setNetworkState((prev) => ({
             ...prev,
             data: {
                 nodes,
-                links: links.filter((link)=>{
-                    if(link.Type==='main'){
-                        return link
-                    }
-                })
+                links
             },
         }))
     }

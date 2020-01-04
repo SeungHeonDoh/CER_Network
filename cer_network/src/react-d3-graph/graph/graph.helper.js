@@ -167,7 +167,7 @@ function buildLinkProps(
     let stroke = config.link.color;
 
     if (highlight) {
-        stroke = config.link.highlightColor === CONST.KEYWORDS.SAME ? config.link.color : config.link.highlightColor;
+        stroke = config.colorMapper[nodes[target][config.colorKey]];
     }
 
     let strokeWidth = config.link.strokeWidth * (1 / transform);
@@ -210,7 +210,7 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
     }
 
     if (highlight && config.node.highlightColor !== CONST.KEYWORDS.SAME) {
-        fill = config.node.highlightColor;
+        fill = config.colorMapper[node[config.colorKey]];
     }
 
     let stroke = config.node.strokeColor;
@@ -235,7 +235,9 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
     
     if (highlight) {
         nodeSize *= 2;
-        fontColor = "lightgreen"
+        fontColor = config.colorMapper[node[config.colorKey]];
+    } else{
+        fontSize = 0;
     }
 
     let type;
@@ -244,6 +246,7 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
     }else{
         type = node.symbolType || config.symbolMapper[node[config.symbolKey]];
     }
+    
     return {
         className: CONST.NODE_CLASS_NAME,
         cursor: config.node.mouseCursor,
