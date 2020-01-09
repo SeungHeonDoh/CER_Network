@@ -180,9 +180,9 @@ function buildLinkProps(
     return {
         source,
         target,
-        x1: x1*config.width/3 + config.width/2,
+        x1: x1*config.width/3 + config.width/2 - 200,
         y1: y1*config.height/3 + config.height/2,
-        x2: x2*config.width/3 + config.width/2,
+        x2: x2*config.width/3 + config.width/2 - 200,
         y2: y2*config.height/3 + config.height/2,
         strokeWidth,
         stroke,
@@ -250,7 +250,7 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
     return {
         className: CONST.NODE_CLASS_NAME,
         cursor: config.node.mouseCursor,
-        cx: (node && node.x*config.width/3 + config.width/2) || '0',
+        cx: (node && node.x*config.width/3 + config.width/2 - 200) || '0',
         cy: (node && node.y*config.height/3 + config.height/2) || '0',
         fill,
         fontColor,
