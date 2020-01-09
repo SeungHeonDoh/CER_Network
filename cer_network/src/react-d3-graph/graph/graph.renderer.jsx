@@ -49,8 +49,8 @@ function _buildNodeLinks(nodeId, nodes, links, config, linkCallbacks, highlighte
 function buildGraph(nodes, nodeCallbacks, links, linkCallbacks, config, highlightedNode, highlightedLink, transform) {
     let linksComponents = [];
     let nodesComponents = [];
-
-    for (let i = 0, keys = Object.keys(nodes), n = keys.length; i < n; i++) {
+    let keys = Object.keys(nodes);
+    for (let i = keys.length-1; i > 0; i--) {
         const nodeId = keys[i];
         const props = buildNodeProps(nodes[nodeId], config, nodeCallbacks,
                                         highlightedNode, highlightedLink, transform);
