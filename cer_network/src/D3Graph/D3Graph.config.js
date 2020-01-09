@@ -38,7 +38,7 @@ const getDefaultConfig = (themeType) => {
             color: theme[themeType].node.color,
             highlightColor: theme[themeType].node.highlightColor,
             fontColor: theme[themeType].node.fontColor,
-            labelProperty: 'name',
+            labelProperty: 'text',
             size: 20,
         },
         link: {

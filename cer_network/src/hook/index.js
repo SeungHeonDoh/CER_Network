@@ -16,8 +16,8 @@ const useNetwork = () => {
     }
 
     async function loadGraphData(){
-        const nodes = await require('../data/node_v0.0.json');
-        const links = await require('../data/link_v0.0.json');
+        const nodes = await require('../data/node_v0.1.json');
+        const links = await require('../data/link_v0.1.json');
         setNetworkState((prev) => ({
             ...prev,
             data: {

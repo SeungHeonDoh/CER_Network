@@ -78,7 +78,7 @@ export default function Search(){
                             onClick={()=>{handleClickItem(result)}}
                         >
                             <SearchItemTitle>
-                                {TitleMapper[result.Group]}
+                                {TitleMapper[result.group]}
                             </SearchItemTitle>
                             <SearchItemValue>
                                 {result.id}
