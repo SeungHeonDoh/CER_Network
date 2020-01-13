@@ -87,3 +87,53 @@ export const Page = styled.div `
     overflow-x: hidden;
     overflow-y: hidden;
 `
+
+export const contentsContainer = styled.div `
+    width : 90%;
+    height : 90%;
+`
+
+export const subContents = styled.div `
+    opacity: 0.5;
+    font-family: AppleSDGothicNeo;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+`
+
+export const mainContents = styled.div `
+    font-family: AppleSDGothicNeo;
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+`
+
+export const HeaderContainer = styled.div`
+    width : 90%:
+
+`
+export const Header = styled.div`
+    display: flex;
+`
+
+export const ImageContainer = styled.div`
+    url = ${props => props.bgUrl}
+`
+
+export const MainImage = styled.div`
+    url = ${props => props.imageUrl}
+    z-index : 2
+`
+
+export const BackgroundImage = styled.div`
+    url = ${props => props.backimgUrl}
+    z-index : 1
+`

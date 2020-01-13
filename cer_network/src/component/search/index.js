@@ -67,7 +67,6 @@ export default function Search(){
             <SearchResults>
                 <tbody>
                 {results.map((result) => {
-                    console.log(result);
                     let hasKeyword = false;
                     if(result.hasOwnProperty("attritube")){
                         hasKeyword = result.attritube.hasOwnProperty('key_list');
