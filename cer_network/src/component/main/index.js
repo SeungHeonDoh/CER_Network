@@ -31,11 +31,11 @@ export default function Main() {
             },
             colorMapper: {
                 'artist': '#ff00de',
-                'project': '#2a00ff',
+                'project': '#9A86FA',
                 'word': 'gray'
             },
             sizeMapper: {
-                'artist': 80,
+                'artist': 100,
                 'project': 80,
                 'word': 20
             }

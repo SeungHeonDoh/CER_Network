@@ -89,7 +89,7 @@ export default function Search(){
                             <SearchItemValue
                                 width="100%"
                             >
-                                {hasKeyword?result.attritube.key_list.join():""}
+                                {hasKeyword?result.attritube.key_list.join(" , "):""}
                             </SearchItemValue>
                         </SearchItem>
                     )
