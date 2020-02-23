@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import useNetwork from '../../hook';
 import D3Graph from '../../D3Graph/D3Graph';
-import dummy from '../../utils/data';
+import Search from '../search';
 import { createConfig } from '../../D3Graph/D3Graph.config';
 import { RenderArea } from '../../styles';
 
 
 export default function Main() {
-    const { setActivateNode, activated } = useNetwork();
+    const { setActivateNode, setActivateFunction, loadGraphData, data } = useNetwork();
     const [ loading, setLoading ] = useState(true);
     const [ config, setConfig ] = useState({
     });
@@ -18,35 +18,49 @@ export default function Main() {
         },
         link: {
             opacityKey: 'strength',
+            highlightColor: 'lightgreen'
         },
         graph: {
-            symbolKey: 'level',
-            colorKey: 'level',
+            symbolKey: 'Group',
+            colorKey: 'Group',
+            sizeKey: 'Group',
             symbolMapper: {
-                1: 'circle',
-                2: 'circle',
+                'word': 'circle',
+                'project': 'circle',
+                'artist': 'circle',
             },
             colorMapper: {
-                1: '#ff00de',
-                2: '#2a00ff',
+                'artist': '#ff00de',
+                'project': '#9A86FA',
+                'word': 'gray'
+            },
+            sizeMapper: {
+                'artist': 100,
+                'project': 80,
+                'word': 20
             }
         }
     });
 
-    const [ data, setData ] = useState(null);
     useEffect(() => {
-        setData(dummy);
-        setConfig(graphConfig);
-        setLoading(false);
+        handleLoadData();
     }, [])
+
+    async function handleLoadData(){
+        setConfig(graphConfig);
+        await loadGraphData();
+        setLoading(false);
+    }
     
     return (
         <RenderArea>
+            <Search />
             <D3Graph 
                 data={data}
                 config={config}
                 loading={loading}
                 setActivateNode={setActivateNode}
+                setActivateFunction={setActivateFunction}
             />
         </RenderArea>
     )

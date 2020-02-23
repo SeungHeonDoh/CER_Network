@@ -167,7 +167,7 @@ function buildLinkProps(
     let stroke = config.link.color;
 
     if (highlight) {
-        stroke = config.link.highlightColor === CONST.KEYWORDS.SAME ? config.link.color : config.link.highlightColor;
+        stroke = config.colorMapper[nodes[target][config.colorKey]];
     }
 
     let strokeWidth = config.link.strokeWidth * (1 / transform);
@@ -180,10 +180,10 @@ function buildLinkProps(
     return {
         source,
         target,
-        x1,
-        y1,
-        x2,
-        y2,
+        x1: x1*6 + config.width/2-300,
+        y1: y1*5 + config.height/2,
+        x2: x2*6 + config.width/2-300,
+        y2: y2*5 + config.height/2,
         strokeWidth,
         stroke,
         className: CONST.LINK_CLASS_NAME,
@@ -210,7 +210,7 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
     }
 
     if (highlight && config.node.highlightColor !== CONST.KEYWORDS.SAME) {
-        fill = config.node.highlightColor;
+        fill = config.colorMapper[node[config.colorKey]];
     }
 
     let stroke = config.node.strokeColor;
@@ -219,13 +219,26 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
         stroke = config.node.highlightStrokeColor;
     }
 
+    var nodeSize;
+    if(config.colorKey == undefined){
+        nodeSize = node.size || config.node.size;
+    }  else {
+        nodeSize = node.size || config.sizeMapper[node[config.sizeKey]];
+    }
+
     const t = 1 / transform;
-    const nodeSize = node.size || config.node.size;
-    const fontSize = highlight ? config.node.highlightFontSize : config.node.fontSize;
-    const dx = fontSize * t + nodeSize / 100 + 1.5;
+    var fontSize = highlight ? config.node.highlightFontSize : config.node.fontSize;
+    var dx = fontSize * t + nodeSize / 100 + 1.5;
     const strokeWidth = highlight ? config.node.highlightStrokeWidth : config.node.strokeWidth;
     const svg = node.svg || config.node.svg;
-    const fontColor = node.fontColor || config.node.fontColor;
+    var fontColor = node.fontColor || config.node.fontColor;
+    
+    if (highlight) {
+        nodeSize *= 2;
+        fontColor = config.colorMapper[node[config.colorKey]];
+    } else{
+        fontSize = 0;
+    }
 
     let type;
     if(config.symbolKey == undefined){
@@ -233,12 +246,12 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
     }else{
         type = node.symbolType || config.symbolMapper[node[config.symbolKey]];
     }
-
+    
     return {
         className: CONST.NODE_CLASS_NAME,
         cursor: config.node.mouseCursor,
-        cx: (node && node.x) || '0',
-        cy: (node && node.y) || '0',
+        cx: (node && node.x*6 + config.width/2-300) || '0',
+        cy: (node && node.y*5 + config.height/2) || '0',
         fill,
         fontColor,
         fontSize: fontSize * t,

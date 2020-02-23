@@ -118,6 +118,12 @@ export default class Graph extends React.Component {
 
     onClickNode = node => {
         this.props.onClickNode && this.props.onClickNode(node);
+        if(this.state.highlightedNode===''){
+            this._highlightOn(node);
+        }else{
+            this._highlightOff(node);
+            this.restartSimulation();
+        }
     };
 
     onDoubleClickNode = node => {
@@ -127,14 +133,14 @@ export default class Graph extends React.Component {
     onMouseOverNode = node => {
         // this.props.onMouseOverNode && this.props.onMouseOverNode(node);
         // this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(id, true);
-        this._highlightOn(node);
+        // this._highlightOn(node);
     };
 
     onMouseOutNode = node => {
         // this.props.onMouseOutNode && this.props.onMouseOutNode(node);
         // this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(id, false);
-        this._highlightOff(node);
-        this.restartSimulation();
+        // this._highlightOff(node);
+        // this.restartSimulation();
     };
 
     onMouseOverLink = (source, target) => {
@@ -172,6 +178,15 @@ export default class Graph extends React.Component {
         }
     };
 
+    activateNodeMethod = async (node) => {
+        if(this.state.highlightedNode!==''){
+            await this._highlightOff(node);
+            await this.restartSimulation();
+        
+        }
+        this._highlightOn(node);
+    }
+
     restartSimulation = () => !this.state.config.staticGraph && this.state.simulation.restart();
 
     constructor(props) {
@@ -183,6 +198,8 @@ export default class Graph extends React.Component {
 
         this.state = graphHelper.initializeGraphState(this.props, this.state);
         this.state.isFocused = false;
+ 
+        this.props.setActivateFunction(this.activateNodeMethod);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -199,7 +216,6 @@ export default class Graph extends React.Component {
         const config = configUpdated ? utils.merge(DEFAULT_CONFIG, nextProps.config || {}) : this.state.config;
         // in order to properly update graph data we need to pause eventual d3 ongoing animations
         newGraphElements && this.pauseSimulation();
-
         const transform = nextProps.config.panAndZoom !== this.state.config.panAndZoom ? 1 : this.state.transform;
         this.setState({
             ...state,

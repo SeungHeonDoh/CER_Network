@@ -22,20 +22,23 @@ function _buildNodeLinks(nodeId, nodes, links, config, linkCallbacks, highlighte
             const target = adjacents[j];
 
             if (nodes[target]) {
-                const key = `${nodeId}${CONST.COORDS_SEPARATOR}${target}`;
-                const props = buildLinkProps(
-                    source,
-                    target,
-                    nodes,
-                    links,
-                    config,
-                    linkCallbacks,
-                    highlightedNode,
-                    highlightedLink,
-                    transform
-                );
+                const linkType = links[source][target]['Type'] || 'main';
+                if(linkType === 'main'){
+                    const key = `${nodeId}${CONST.COORDS_SEPARATOR}${target}`;
+                    const props = buildLinkProps(
+                        source,
+                        target,
+                        nodes,
+                        links,
+                        config,
+                        linkCallbacks,
+                        highlightedNode,
+                        highlightedLink,
+                        transform
+                    );
 
-                linksComponents.push(<Link key={key} {...props} />);
+                    linksComponents.push(<Link key={key} {...props} />);
+                }
             }
         }
     }

@@ -22,6 +22,15 @@ export default class Node extends React.Component {
             opacity: this.props.opacity
         };
 
+        const circleProps = {
+            cursor: this.props.cursor,
+            onClick: this.handleOnClickNode,
+            onDoubleClick: this.handleOnDoubleClickNode,
+            onMouseOut: this.handleOnMouseOutNode,
+            onMouseOver: this.handleOnMouseOverNode,
+            opacity: this.props.opacity
+        }
+
         const textProps = {
             dx: this.props.dx || CONST.NODE_LABEL_DX,
             dy: CONST.NODE_LABEL_DY,
@@ -36,6 +45,7 @@ export default class Node extends React.Component {
         let gty = this.props.cy;
         let label;
         let node;
+        let circle;
 
         if (this.props.svg) {
             const height = size / 10;
@@ -59,9 +69,9 @@ export default class Node extends React.Component {
             nodeProps.fill = this.props.fill;
             nodeProps.stroke = this.props.stroke;
             nodeProps.strokeWidth = this.props.strokeWidth;
-
             label = <text {...textProps}>{this.props.label}</text>;
             node = <path {...nodeProps} />;
+            circle = <circle r={size/9.5} fill="none" stroke={this.props.fill} opacity={this.props.opacity}/>;
         }
 
         const gProps = {
@@ -75,6 +85,7 @@ export default class Node extends React.Component {
         return (
             <g {...gProps}>
                 {node}
+                {circle}
                 {this.props.renderLabel && label}
             </g>
         );
