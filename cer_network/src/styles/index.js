@@ -1,5 +1,114 @@
 import styled from 'styled-components'
 
+
+export const RowContainer = styled.div `
+    display: flex;
+    flex-direction: row;
+`
+
+export const ObjectContainer = styled.div `
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+`
+
+export const TextContainer = styled.div `
+    opacity: 0.9;
+    font-size: 1em;
+`
+
+
+export const SmallCase = styled.div `
+    opacity: 0.5;
+    font-size: 0.8em;
+    margin-top : 2em;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+`
+export const MiddleCase = styled.div `
+    opacity: 0.9;
+    font-size: 1em;
+    margin-top : 5px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+`
+export const HighCase = styled.div `
+    font-size: 1.2em;
+    margin-top : 5px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+`
+
+
+export const DescriptionContainer = styled.div `
+    height : 100%;
+    margin : 2em 2em 2em 2em;
+    display: flex;
+    flex-direction: column;
+`
+
+
+export const CenterContainer = styled.div `
+    width : 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+export const HeaderContainer = styled.div `
+    width : 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
+
+export const HeaderContents = styled.div `
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+`
+
+export const Logo = styled.div`
+    height: 20px;
+    width : 100px;
+    background-image: url(${({ background }) => background});
+    background-repeat: no-repeat;
+    background-size: contain;
+`;
+
+export const Stat = styled.div`
+    width : 100%;
+    height: 200px;
+    background-image: url(${({ background }) => background});
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-top : 15px;
+`;
+
+
+export const Image = styled.div`
+    width : 100%;
+    height: 200px;
+    background-image: url(${({ background }) => background});
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-top : 3em;
+`;
+
+
+
 export const SearchItemValue = styled.th `
     width: ${(props) => props.width? props.width: "15%"};
     font-size: 15px;
@@ -24,7 +133,7 @@ export const SearchItem = styled.tr `
 
     &:hover{
         background-color: #000000;
-        background-color: rgba( 255, 255, 255, 0.5 );
+        background-color: rgba( 0, 0, 0, 0.5 );
     }
 
 `
@@ -73,17 +182,26 @@ export const RenderArea = styled.div `
 `
 
 export const DescriptionArea = styled.div `
-    width: 700px;
-    z-index: 1200;
+    width: 35%;
     background-color: #191919;
-    top: 0px;
-    position: relative;
     color: white;
 `
 
 export const Page = styled.div `
+    width : 100%;
+    height : 100%;
     display: flex;
-    position: relative;
     overflow-x: hidden;
     overflow-y: hidden;
+    font-family: sans-serif;
+    background-color: black;
+    a{
+        text-decoration:none;
+        color:inherit;
+    }
+    body{
+        font-family: sans-serif;
+        color:white;
+        margin:0;
+    }
 `

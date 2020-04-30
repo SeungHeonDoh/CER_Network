@@ -7,7 +7,7 @@ export default {
         END_ANGLE: 2 * Math.PI
     },
     DEFAULT_NODE_SIZE: CONFIG.node.size,
-    NODE_LABEL_DX: '.90em',
-    NODE_LABEL_DY: '.35em',
+    NODE_LABEL_DX: '1.2em',
+    NODE_LABEL_DY: '.4em',
     ...CONST
 };
