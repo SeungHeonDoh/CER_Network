@@ -283,7 +283,17 @@ export default class Graph extends React.Component {
 
         return (
             <GraphArea id={`${this.state.id}-${CONST.GRAPH_WRAPPER_ID}`}>
-                <svg style={svgStyle}>
+                <svg 
+                    style={svgStyle}
+                >
+                    <rect 
+                        width="100%" 
+                        height="100%"
+                        onClick={()=>{
+                            this._highlightOff(this.state.highlightedNode);
+                            this.restartSimulation();
+                        }}
+                    />
                     <g id={`${this.state.id}-${CONST.GRAPH_CONTAINER_ID}`}>
                         {links}
                         {nodes}

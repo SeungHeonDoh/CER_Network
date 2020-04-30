@@ -21,9 +21,9 @@ export default function Main() {
             highlightColor: 'lightgreen'
         },
         graph: {
-            symbolKey: 'Group',
-            colorKey: 'Group',
-            sizeKey: 'Group',
+            symbolKey: 'group',
+            colorKey: 'group',
+            sizeKey: 'group',
             symbolMapper: {
                 'word': 'circle',
                 'project': 'circle',
